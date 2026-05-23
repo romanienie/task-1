@@ -1,23 +1,68 @@
-﻿using System; // подключение библиотеки
+using System; // подключение библиотеки
 
 class Task1Power // обозначение начала с наименованием кода
-
-{ // относится к классу class Task1Power
+{
     static void Main() // точка входа в код
     {
-        Console.Write("Введи число а (например, 3): "); // просим ввести число
-        int a = Convert.ToInt32(Console.ReadLine()); // ввод числа
+        int a = 0;
+        int n = 0;
+        bool validInput = false;
 
-        Console.Write("Введи степень n (например, 4):"); // просим ввести число
-        int n = Convert.ToInt32(Console.ReadLine()); // ввод числа
-
-        int result = 1; // начинаем с 1 по тому что если умножить на 0, то все сломается
-
-        for (int i = 1; i <= n; i++) // цыкл
+        // защита для числа a (натуральное число)
+        while (!validInput) // цикл
         {
-            result = result * a; // тело цыкла
+            Console.Write("введи число а (натуральное число, например, 3): ");
+            string input = Console.ReadLine();
+
+            if (int.TryParse(input, out a) && a > 0) // условие
+            {
+                validInput = true;
+            }
+            else // не выполнение условия
+            {
+                Console.WriteLine("ошибка! введите натуральное число (целое, положительное, больше 0).");
+            }
         }
 
-        Console.WriteLine(a + " в степени " + n + " = " + result); // ответ
+        validInput = false;
+
+        // защита для степени n (натуральное число)
+        while (!validInput) // цикл
+        {
+            Console.Write("введи степень n (натуральное число, например, 4): ");
+            string input = Console.ReadLine();
+
+            if (int.TryParse(input, out n) && n > 0) // условие
+            {
+                validInput = true;
+            }
+            else // не выполнение условия
+            {
+                Console.WriteLine("ошибка! введите натуральное число (целое, положительное, больше 0).");
+            }
+        }
+
+        int result = 1; // начинаем с 1
+
+        // защита от переполнения (опционально)
+        try // обработка
+        {
+            for (int i = 1; i <= n; i++) // цикл
+            {
+                result = result * a; // тело цикла
+
+                // Проверка на переполнение (для int)
+                if (result < 0 && i < n) // условие
+                {
+                    Console.WriteLine("внимание! переполнение, результат может быть некорректным.");
+                }
+            }
+
+            Console.WriteLine(a + " в степени " + n + " = " + result); // ответ
+        }
+        catch (OverflowException) // не выполнение обработки
+        {
+            Console.WriteLine("ошибка! результат слишком большой для хранения в типе int.");
+        }
     }
 }
