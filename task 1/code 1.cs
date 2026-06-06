@@ -2,8 +2,8 @@ using System;
 
 class Program
 {
-  static void Main()
-    {
+  static void Main(){
+    
       int aIndex = 0; // variable a
       int nIndex = 0; // variable n
       bool validInput = false; // variable for loop repetition
