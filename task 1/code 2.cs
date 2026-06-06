@@ -1,80 +1,65 @@
-﻿using System; // подключение библиотеки
+using System;
 
-class Program1 // объявление класса
-{
-    static void Main() // точка входа
-    {
-        Console.Write("введите число x (не меньше 100): "); // вывод текста
-        string input = Console.ReadLine(); // сохранение в переменную
+class Program{
 
-        // защита 1: проверка на пустую строку
-        if (string.IsNullOrEmpty(input)) // проверка условия
-        {
-            Console.WriteLine("ошибка: вы ничего не ввели!");
+  static void Main(){
+
+        Console.WriteLine ("Введите число x (не меньше 100): ");
+        string input = Console.ReadLine();
+        // protection 1 (empty string)
+        if (string.IsNullOrEmpty(input)) {
+            Console.WriteLine("Ошибка! введите значение, например 123");
             return;
         }
-
-        // защита 2: проверка на то, что введены только цыфры
-        foreach (char c in input) // цыкл
-        {
-            if (!char.IsDigit(c)) // проверка условия
+        // protection 2 (to numbers)
+        foreach ( char c in input) {
+          if (!char.IsDigit(c))
             {
-                Console.WriteLine("ошибка: можно вводить только цифры!");
+                Console.WriteLine("Ошибка! введите только цифры, например 123");
                 return;
             }
         }
-
-        // защита 3: проверка на большое количество цыфр
-        // ограничение цыфр 10
-        if (input.Length > 10) // проверка условия
+        // protector 3 (digit limit 10)
+        if (input.Length > 10)
         {
-            Console.WriteLine("ошибка: число слишком длинное! максимум 10 цифр.");
-            Console.WriteLine($"вы ввели {input.Length} цифр, а можно не больше 10.");
+            Console.WriteLine("Ошибка! лимит цифр 10");
             return;
         }
-
-        // защита 4: проверяем, что число не меньше 100
-        int x = int.Parse(input);
-        if (x < 100) // проверка условия
-        {
-            Console.WriteLine("ошибка: число должно быть не меньше 100!");
-            Console.WriteLine($"вы ввели {x}, а нужно 100 или больше.");
+        
+        int xIndex = int.Parse(input);
+        // protector 4 (number not less 100)
+        if (xIndex < 100) {
+            Console.WriteLine("Ошибка! число не менее 100, например 123");
             return;
         }
-
-        // защита 5: дополнительная защита от переполнения
-        // (на случай больших чисел)
-        try // обработка
+        // protector 5 (overfill protection)
+        try
         {
-            string xStr = x.ToString();
+            string xStr = xIndex.ToString();
 
-            // проверяем, что в числе больше двух цифр
-            if (xStr.Length < 3) // проверка условия
+            if (xStr.Length < 3)
             {
-                Console.WriteLine("ошибка: в числе должно быть больше двух цифр!");
+                Console.WriteLine("Ошибка! в числе не менее 3-ех цыфр");
                 return;
             }
 
             char secondDigit = xStr[1];
             string afterRemove = xStr[0] + xStr.Substring(2);
             string resultStr = afterRemove + secondDigit;
-
-            // защита 6: проверяем, что результат не вызовет переполнение
-            // (результат может быть длиннее исходного числа)
-            if (resultStr.Length > 10) // проверка условия
-            {
-                Console.WriteLine("ошибка: результат получился слишком длинным!");
+            // protector 6 (don`t cause overflow)
+            if (resultStr.Length > 10) {
+                Console.WriteLine("Ошибка! результат слишком длинный");
                 return;
             }
 
-            int n = int.Parse(resultStr);
+            int nIndex = int.Parse(resultStr);
 
-            Console.WriteLine($"x = {x}");
-            Console.WriteLine($"n = {n}");
+            Console.WriteLine($"x = {input}\nn = {nIndex}");
+
         }
-        catch (OverflowException) // не выполнение обработки
-        {
-            Console.WriteLine("ошибка: число слишком большое для программы!");
+        catch (OverflowException){
+            Console.WriteLine("Ошибка! число большое для программы");
         }
-    }
+
+  }
 }
