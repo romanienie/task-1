@@ -4,12 +4,12 @@ class Program{
   
   static void Main(){
     
-      int aIndex = 0; // variable a
-      int nIndex = 0; // variable n
-      bool validInput = false; // variable for loop repetition
+    int aIndex = 0; // variable a
+    int nIndex = 0; // variable n
+    bool validInput = false; // variable for loop repetition
 
-      // protection for number `a` (natural number)
-      while (!validInput){
+    // protection for number `a` (natural number)
+    while (!validInput){
 
             Console.WriteLine("Введите число `a` ( натуральное число, например 3 )");
             string input = Console.ReadLine();
