@@ -1,68 +1,71 @@
-using System; // подключение библиотеки
+using System;
 
-class Task1Power // обозначение начала с наименованием кода
-{
-    static void Main() // точка входа в код
-    {
-        int a = 0;
-        int n = 0;
-        bool validInput = false;
+class Program{
+  
+  static void Main(){
+    
+    int aIndex = 0; // variable a
+    int nIndex = 0; // variable n
+    bool validInput = false; // variable for loop repetition
 
-        // защита для числа a (натуральное число)
-        while (!validInput) // цикл
-        {
-            Console.Write("введи число а (натуральное число, например, 3): ");
+    // protection for number `a` (natural number)
+    while (!validInput){
+
+            Console.WriteLine("Введите число `a` ( натуральное число, например 3 )");
             string input = Console.ReadLine();
+            
+            // condition natural number
+            if(int.TryParse(input, out aIndex)&& aIndex > 0){
 
-            if (int.TryParse(input, out a) && a > 0) // условие
-            {
-                validInput = true;
+              validInput = true;
             }
-            else // не выполнение условия
-            {
-                Console.WriteLine("ошибка! введите натуральное число (целое, положительное, больше 0).");
+            else{
+
+                Console.WriteLine("Ошибка! Введите натуральное число, например 3");
             }
         }
 
-        validInput = false;
+      // return value for proper operation
+      validInput = false;
 
-        // защита для степени n (натуральное число)
-        while (!validInput) // цикл
-        {
-            Console.Write("введи степень n (натуральное число, например, 4): ");
-            string input = Console.ReadLine();
+      // protection for number `n` (natural number)
+      while (!validInput){
 
-            if (int.TryParse(input, out n) && n > 0) // условие
-            {
-                validInput = true;
+          Console.WriteLine("Введите степень n (натуральное число, например 3)");
+          string input = Console.ReadLine() ;
+          
+          // condition natural number
+          if (int.TryParse(input, out nIndex) && nIndex > 0){
+
+              validInput = true;
             }
-            else // не выполнение условия
-            {
-                Console.WriteLine("ошибка! введите натуральное число (целое, положительное, больше 0).");
+            else{
+
+                Console.WriteLine("Ошибка! Ведите натуральное число, например 3");
             }
         }
 
-        int result = 1; // начинаем с 1
+      int result = 1;
 
-        // защита от переполнения (опционально)
-        try // обработка
-        {
-            for (int i = 1; i <= n; i++) // цикл
-            {
-                result = result * a; // тело цикла
+      try{
 
-                // Проверка на переполнение (для int)
-                if (result < 0 && i < n) // условие
-                {
-                    Console.WriteLine("внимание! переполнение, результат может быть некорректным.");
+          for(int iIndex = 1; iIndex <= nIndex; iIndex++){
+              
+                result = result * aIndex;
+
+              if (result < 0 && iIndex < nIndex){
+
+                    Console.WriteLine("Внимание! переполнение, результат может быть не корректным.");
                 }
             }
 
-            Console.WriteLine(a + " в степени " + n + " = " + result); // ответ
+            Console.WriteLine(aIndex + " в степени " + nIndex + " = " + result);
+
         }
-        catch (OverflowException) // не выполнение обработки
-        {
-            Console.WriteLine("ошибка! результат слишком большой для хранения в типе int.");
+        catch (OverflowException){
+            
+            Console.WriteLine("Ошибка! результат слишком большой для хранения в типе int.");
         }
+        
     }
 }
